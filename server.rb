@@ -1,4 +1,4 @@
-require-relative 'lib/sms.rb'
+require_relative 'lib/sms.rb'
 
 get '/' do
   :layout
