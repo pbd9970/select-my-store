@@ -30,4 +30,17 @@ post '/sign_in' do
     @error = result[:error]
     erb :signin_error
   end
+
+get '/design/home' do
+  erb :home
+end
+
+get '/design/results' do
+  erb :results
+end
+
+get '/design/qualities' do
+  erb :qualities
+end
+
 end
