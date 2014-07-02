@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Select My Store</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/style.css">
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
+    </head>
+    <body>
+
+      <%= erb :_header %>
+
+      <%= yield %>
+
+      <%= erb :_modals %>
+
+      <% if !params.nil? %>
+        <hr />
+        <%= params.inspect %>
+      <% end %>
+
+      <!-- body goes here -->
+      <script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
+      <script type="text/javascript" src="/js/vendor/foundation.min.js"></script>
+      <script type="text/javascript" src="/js/vendor/foundation.init.js"></script>
+    </body>
+</html>

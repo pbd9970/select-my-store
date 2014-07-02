@@ -1,0 +1,33 @@
+<% if @user %>
+  <header class="clearfix">
+  <div class="row">
+    <div class="large-2 columns logo">
+      MyLogo
+    </div>
+    <div class="large-3 columns login">
+      <form method="post" action="/sign_in">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+        <input type="submit" value="Login" class="button tiny" />
+        <a href="#" class="button tiny">Sign Up</a>
+      </form>
+    </div>
+  </div>
+</header>
+<% else %>
+  <header class="clearfix">
+  <div class="row">
+    <div class="large-2 columns logo">
+      MyLogo
+    </div>
+    <div class="large-3 columns login">
+      <form method="post" action="/design/sign_in">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+        <input type="submit" value="Login" class="button tiny" />
+        <a href="#" data-reveal-id="myModal" class="button tiny">Sign Up</a>
+      </form>
+    </div>
+  </div>
+</header>
+<% end %>
