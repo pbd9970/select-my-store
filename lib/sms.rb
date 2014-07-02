@@ -1,3 +1,4 @@
+
 module SMS
   def db
     @__db_instance ||= DB.new
