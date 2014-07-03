@@ -21,24 +21,29 @@ get 'design/home' do
 erb :index
 end
 
-post 'design/home' do
+post 'sign_in' do
+  if user
+    redirect 'design/home'
+  end
+
   puts params
   erb :index
 end
 
 post '/sign_in' do
   params
-  result = SMS.script.sign_in(params)
-  if result[:success?]
-    user = result[:user]
-    @username = user.username
-    @user_id = user.id
-    session[:username] = user.username
-    redirect '/design'
-  else
-    @error = result[:error]
-    erb :signin_error
-  end
+  @user = true
+  # result = SMS.script.sign_in(params)
+  # if result[:success?]
+  #   user = result[:user]
+  #   @username = user.username
+  #   @user_id = user.id
+  #   session[:username] = user.username
+  #   redirect '/design'
+  # else
+  #   @error = result[:error]
+  #   erb :signin_error
+  # end
 end
 
 get '/design/home' do
