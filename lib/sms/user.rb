@@ -1,6 +1,8 @@
 class SMS::User < SMS::DB_class
   attr_accessor :first_name, :last_name, :username, :birthday, :sex, :email, :admin, :user_id
 
+  @@unique_val = :username
+
   def initialize(params)
     @first_name = params[:first_name]
     @last_name  = params[:last_name ]
@@ -47,8 +49,8 @@ class SMS::User < SMS::DB_class
   end
 
   def save!
-    @password = Digest::SHA1.hexdigest password
-    super(:users, self.class, db_map)
+    @password = Digest::SHA1.hexdigest @password
+    @user_id = super(:users, self.class, db_map, :user_id)
   end
 
   def update!(db_cols)
@@ -56,7 +58,7 @@ class SMS::User < SMS::DB_class
   end
 
   def retrieve!
-    db_cols = db_map.select {|k,value| value }
+    db_cols = @user_id ? {user_id: @user_id} : db_map(@@unique_val)
     super(:users, self.class, db_cols)
   end
 end
