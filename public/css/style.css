@@ -6755,3 +6755,13 @@ header .logo {
 /* line 83, ../scss/custom.scss */
 .panel {
   background-color: #f6c70d; }
+
+/* line 87, ../scss/custom.scss */
+.small.button {
+  background-color: #f6c705;
+  border-radius: 3px; }
+
+/* line 92, ../scss/custom.scss */
+#quality-pool {
+  background-color: #f6c705;
+  border-radius: 3px; }
