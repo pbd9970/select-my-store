@@ -7,29 +7,33 @@ require_relative 'lib/sms.rb'
 set :bind, '0.0.0.0'
 set :port, 9494
 
+get '/' do
+  erb :index
+end
+
 get '/design' do
   @message = "im data"
   erb :index
 end
 
-post '/design/sign_in' do
+post '/sign_in' do
   puts params
-  erb :index
+  erb :sign_in
 end
 
-post '/sign_in' do
-  params
-  result = SMS.script.sign_in(params)
-  if result[:success?]
-    user = result[:user]
-    @username = user.username
-    @user_id = user.id
-    session[:username] = user.username
-    redirect '/design'
-  else
-    @error = result[:error]
-    erb :signin_error
-  end
+# post '/sign_in' do
+#   params
+#   result = SMS.script.sign_in(params)
+#   if result[:success?]
+#     user = result[:user]
+#     @username = user.username
+#     @user_id = user.id
+#     session[:username] = user.username
+#     redirect '/design'
+#   else
+#     @error = result[:error]
+#     erb :signin_error
+#   end
 
 get '/design/home' do
   erb :home
@@ -43,4 +47,4 @@ get '/design/qualities' do
   erb :qualities
 end
 
-end
+
