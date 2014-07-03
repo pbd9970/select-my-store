@@ -1,20 +1,16 @@
 module SMS
-  def db
+  def self.db
     @__db_instance ||= DB.new
   end
-
-module SMS
-  def db
-    @__db_instance ||= DB.new
-  end
+end
 
 require 'sinatra'
 require 'pg'
 require 'digest'
 require 'securerandom'
 
-require-relative 'lib/user.rb'
-require-relative 'lib/store.rb'
-require-relative 'lib/quality.rb'
-require-relative 'lib/db.rb'
-#require-relative "lib/scripts/*.rb"
+require-relative 'sms/user.rb'
+require-relative 'sms/store.rb'
+require-relative 'sms/quality.rb'
+require-relative 'sms/db.rb'
+#require-relative "sms/scripts/*.rb"
