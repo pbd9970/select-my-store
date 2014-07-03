@@ -1,8 +1,10 @@
 class SMS::Quality < SMS::DB_class
   attr_accessor :name, :male, :female, :quality_id
 
+  @@unique_val = :name
+
   def initialize(params)
-    @name       = params[:name      ]
+    @name       = params[:name      ].downcase
     @male       = params[:male      ]
     @female     = params[:female    ]
     @quality_id = params[:quality_id] || nil
@@ -24,15 +26,15 @@ class SMS::Quality < SMS::DB_class
   end
 
   def save!
-    @quality_id = super(:users, self.class, db_map)
+    @quality_id = super(:qualities, self.class, db_map, :quality_id)
   end
 
   def update!(db_cols)
-    super(:users, self.class, db_cols)
+    super(:qualities, self.class, db_cols)
   end
 
   def retrieve!
-    db_cols = db_map.select { |k,value| value }
-    super(:users, self.class, db_cols)
+    db_cols = @quality_id ? {quality_id: @quality_id} : db_map(@@unique_val)
+    super(:qualities, self.class, db_cols)
   end
 end
