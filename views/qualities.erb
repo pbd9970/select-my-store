@@ -11,26 +11,32 @@
 </div>
 
 
-<div class="row">
-
+<div class="row chosen-qualities">
+  <%# the chosen quality buttons will go here %>
 </div>
+
+<hr />
 
 <% if @female %>
-<div class="row">
-  <div class="small-6 large-centered columns">
-    <ul id="qualityPool" class="button-group [radius round]">
-    <% @qualities.each do |quality| %>
-      <li><a href="#" class="button"><%= quality %></a></li>
-    <% end %>
-    </ul>
+  <div class="row">
+    <div class="small-6 large-centered columns">
+      <ul id="qualityPool" class="button-group [radius round]">
+      <%# @qualities.each do |quality| %>
+        <!-- <li><a href="#" class="button"><%#= quality %></a></li> -->
+      <%# end %>
+      </ul>
+    </div>
   </div>
-</div>
 <% else %>
-<div class="row">
-  <div class="small-4 large-centered columns">
-    male condition
+  <div class="row">
+    <div class="small-4 large-centered columns">
+      <ul id="qualityPool" class="button-group [radius round]">
+        male condition
+      </ul>
+    </div>
   </div>
-</div>
 <% end %>
+
+
 
 

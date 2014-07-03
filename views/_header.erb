@@ -2,10 +2,10 @@
   <header class="clearfix">
   <div class="row">
     <div class="large-2 columns logo">
-      MyLogo
+      <img src="images/logo/select-my-store-logo.jpg"/>
     </div>
     <div class="large-3 columns login">
-      <form method="post" action="/sign_in">
+      <form method="post" action="/home">
         <input type="text" name="username" />
         <input type="password" name="password" />
         <input type="submit" value="Login" class="button tiny" />
@@ -17,15 +17,17 @@
 <% else %>
   <header class="clearfix">
   <div class="row">
-    <div class="large-2 columns logo">
-      MyLogo
+    <div class="large-5 columns logo">
+     <img src="images/logo/select-my-store-logo.jpg"/>
     </div>
     <div class="large-3 columns login">
-      <form method="post" action="/design/sign_in">
+      <form method="post" action="/home">
         <input type="text" name="username" />
         <input type="password" name="password" />
-        <input type="submit" value="Login" class="button tiny" />
-        <a href="#" data-reveal-id="myModal" class="button tiny">Sign Up</a>
+        <div class="buttons">
+          <input type="submit" value="Login" class="button tiny" />
+          <a href="#" data-reveal-id="myModal" class="button tiny">Sign Up</a>
+        </div>
       </form>
     </div>
   </div>

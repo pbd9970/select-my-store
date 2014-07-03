@@ -16,9 +16,14 @@ get '/design' do
   erb :index
 end
 
-post '/sign_in' do
+get 'design/home' do
+
+erb :index
+end
+
+post 'design/home' do
   puts params
-  erb :sign_in
+  erb :index
 end
 
 # post '/sign_in' do
@@ -49,5 +54,19 @@ get '/design/qualities' do
   @female = true
   erb :qualities
 end
+
+get '/api/qualities' do
+  @qualities = ["sassy", "chic", "cature", "hip"]
+  json @qualities
+end
+
+
+
+
+
+
+
+
+
 
 

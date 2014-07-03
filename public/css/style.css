@@ -6688,45 +6688,69 @@ header .logo {
 
 /* line 14, ../scss/custom.scss */
 #myModal, .reveal-modal.open {
+  border-radius: 3px;
   width: 40em;
-  margin: 132px 0px 0px -250px; }
+  margin: 132px 0px 0px -250px;
+  border: 1px solid black; }
 
-/* line 21, ../scss/custom.scss */
+/* line 23, ../scss/custom.scss */
 .panel {
   width: 80%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 3px; }
 
-/* line 26, ../scss/custom.scss */
+/* line 30, ../scss/custom.scss */
 .sign-up {
   width: 65%;
   margin: 0 auto; }
 
-/* line 31, ../scss/custom.scss */
-#sign-up {
-  margin-left: 100px; }
-
 /* line 35, ../scss/custom.scss */
+#sign-up {
+  margin-left: 84px;
+  font-size: 16px;
+  background: black;
+  border-radius: 3px; }
+
+/* line 42, ../scss/custom.scss */
 .footer {
   width: 100%;
   height: 4em;
   background: black;
   margin: 0;
   position: fixed;
-  bottom: 0; }
+  bottom: 0;
+  font-size: 16px; }
 
-/* line 45, ../scss/custom.scss */
+/* line 53, ../scss/custom.scss */
+.footer a {
+  color: white; }
+
+/* line 57, ../scss/custom.scss */
+.orbit-container {
+  width: 70%;
+  margin: 0 auto; }
+
+/* line 62, ../scss/custom.scss */
 .example-orbit, img {
   width: 100%;
   height: 50%; }
 
-/* line 50, ../scss/custom.scss */
-.half {
-  height: 50%; }
+/* line 67, ../scss/custom.scss */
+.buttons {
+  text-align: right; }
 
-/* line 53, ../scss/custom.scss */
-.half:first-child {
-  background: blue; }
+/* line 71, ../scss/custom.scss */
+.button.tiny {
+  background-color: #f6c705;
+  padding-bottom: 9px;
+  padding-top: 11px;
+  border-radius: 3px; }
 
-/* line 56, ../scss/custom.scss */
-.half:last-child {
-  background: yellow; }
+/* line 78, ../scss/custom.scss */
+.button.tiny:hover {
+  background-color: #666; }
+
+/* line 82, ../scss/custom.scss */
+.panel {
+  background-color: #f6c70d; }
