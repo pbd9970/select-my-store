@@ -12,15 +12,19 @@ header .logo {
 }
 
 #myModal, .reveal-modal.open{
+  border-radius: 3px;
   width: 40em;
   // // margin-top: 78%;
   // left: 38%;
   margin: 132px 0px 0px -250px;
+  border: 1px solid black;
 }
 
 .panel{
   width: 80%;
   margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 3px;
 }
 
 .sign-up{
@@ -29,7 +33,10 @@ header .logo {
 }
 
 #sign-up{
-  margin-left: 100px;
+  margin-left: 84px;
+  font-size: 16px;
+  background: black;
+  border-radius: 3px;
 }
 
 .footer {
@@ -40,6 +47,16 @@ header .logo {
   margin: 0;
   position: fixed;
   bottom: 0;
+  font-size: 16px;
+}
+
+.footer a{
+  color: white;
+}
+
+.orbit-container{
+  width: 70%;
+  margin: 0 auto;
 }
 
 .example-orbit, img{
@@ -47,12 +64,33 @@ header .logo {
   height: 50%;
 }
 
-.half {
-    height: 50%;
+.buttons{
+  text-align: right;
 }
-.half:first-child {
-    background: blue;
+
+.button.tiny{
+  background-color: #f6c705;
+  padding-bottom: 9px;
+  padding-top: 11px;
+  border-radius: 3px;
 }
-.half:last-child {
-    background: yellow;
+
+  .button.tiny:hover{
+    background-color: #666;
+  }
+
+.panel{
+  background-color: #f6c70d;
 }
+
+
+// .results img.mail {
+//     display: inline-block;
+//     *display: inline; for older IE
+//     *zoom: 1; /* for older IE */
+// }
+
+// #resultsp {
+//   display: inline
+// }
+
