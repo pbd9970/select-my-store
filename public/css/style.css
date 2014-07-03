@@ -6700,3 +6700,33 @@ header .logo {
 .sign-up {
   width: 65%;
   margin: 0 auto; }
+
+/* line 31, ../scss/custom.scss */
+#sign-up {
+  margin-left: 100px; }
+
+/* line 35, ../scss/custom.scss */
+.footer {
+  width: 100%;
+  height: 4em;
+  background: black;
+  margin: 0;
+  position: fixed;
+  bottom: 0; }
+
+/* line 45, ../scss/custom.scss */
+.example-orbit, img {
+  width: 100%;
+  height: 50%; }
+
+/* line 50, ../scss/custom.scss */
+.half {
+  height: 50%; }
+
+/* line 53, ../scss/custom.scss */
+.half:first-child {
+  background: blue; }
+
+/* line 56, ../scss/custom.scss */
+.half:last-child {
+  background: yellow; }
