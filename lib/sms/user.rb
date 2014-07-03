@@ -10,7 +10,7 @@ class SMS::User < DB_class
     @sex        = params[:sex       ]
     @email      = params[:email     ]
     @admin      = params[:admin     ] || false
-    @user_id    = params[:user_id   ] || nil
+    @user_id    = params[:user_id   ]
   end
 
   def has_password?(password)
@@ -19,8 +19,8 @@ class SMS::User < DB_class
   end
 
   def update_password(password)
-    hash_password = Digest::SHA1.hexdigest password
-    update!(hash_password)
+    @password = Digest::SHA1.hexdigest password
+    update!(:password)
   end
 
   def db_map(db_cols=nil)
@@ -38,24 +38,25 @@ class SMS::User < DB_class
   end
 
   def stores(qualities_array)
-    qualities_array.map{|quality_name| do
+    qualities_array.map! do |quality_name|
       SMS::Quality.new({name: quality_name}).retrieve!
     end
-    qualities_array.map(|quality| do
+    qualities_array.map do |quality|
       quality.stores.flatten
     end
   end
 
   def save!
     @password = Digest::SHA1.hexdigest password
-    super(:users)
+    super(:users, self.class, db_map)
   end
 
   def update!(db_cols)
-    super(:users, db_cols)
+    super(:users, self.class, db_cols)
   end
 
   def retrieve!
     db_cols = db_map.select {|k,value| value }
+    super(:users, self.class, db_cols)
   end
 end
