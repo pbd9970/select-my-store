@@ -14,4 +14,4 @@ require_relative 'sms/user.rb'
 require_relative 'sms/store.rb'
 require_relative 'sms/quality.rb'
 require_relative 'sms/db.rb'
-#require_relative "sms/scripts/*.rb"
+require_relative "sms/scripts/session.rb"

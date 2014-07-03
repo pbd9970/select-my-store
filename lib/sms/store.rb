@@ -1,6 +1,8 @@
 class SMS::Store < SMS::DB_class
   attr_accessor :name, :website, :image_url, :store_id, :min_age, :max_age
 
+  @@unique_val = :name
+
   def initialize(params)
     @name      = params[:name     ]
     @website   = params[:website  ]
@@ -15,7 +17,9 @@ class SMS::Store < SMS::DB_class
       "name"       => @name,
       "website"    => @website,
       "image_url"  => @image_url,
-      "store_id"   => @store_id
+      "store_id"   => @store_id,
+      "min_age"    => @min_age,
+      "max_age"    => @max_age
     }
     super(db_cols, db_map_attrs)
   end
@@ -35,16 +39,15 @@ class SMS::Store < SMS::DB_class
   end
 
   def save!
-    @password = Digest::SHA1.hexdigest password
-    super(:users, self.class, db_map)
+    @store_id = super(:stores, self.class, db_map, :store_id)
   end
 
   def update!(db_cols)
-    super(:users, self.class, db_cols)
+    super(:stores, self.class, db_cols)
   end
 
   def retrieve!
-    db_cols = db_map.select { |k,value| value }
-    super(:users, self.class, db_cols)
+    db_cols = @store_id ? {store_id: @store_id} : db_map(@@unique_val)
+    super(:stores, self.class, db_cols)
   end
 end

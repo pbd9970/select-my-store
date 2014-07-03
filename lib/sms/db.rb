@@ -1,8 +1,8 @@
 class SMS::DB
   def initialize
+    @db = PG.connect(host: 'localhost', dbname: 'SMS')
     #drop_tables
     build_tables
-    @db = PG.connect(host: 'localhost', dbname: 'SMS')
   end
 
   def build_tables
@@ -10,39 +10,56 @@ class SMS::DB
              CREATE TABLE IF NOT EXISTS qualities(
              quality_id SERIAL PRIMARY KEY,
              name TEXT,
-             website TEXT,
-             image_url TEXT,
-             description, varchar(140));])
+             male BOOLEAN,
+             female BOOLEAN);])
+             #description varchar(140)
 
     @db.exec( %Q[
              CREATE TABLE IF NOT EXISTS stores(
              store_id SERIAL PRIMARY KEY,
              name TEXT,
-             male BOOLEAN,
-             female BOOLEAN,
+             website TEXT,
+             image_url TEXT,
              min_age INTEGER NOT NULL,
-             max_age INTEGER NOT NULL,
-             description, varchar(140));])
+             max_age INTEGER NOT NULL);])
+             #description varchar(140)
 
     @db.exec( %Q[
              CREATE TABLE IF NOT EXISTS stores_qualities(
              id SERIAL PRIMARY KEY,
-             quality_id FOREIGN KEY,
-             store_id  KEY,
+             store_id INTEGER REFERENCES stores,
+             quality_id INTEGER REFERENCES qualities,
              male BOOLEAN,
-             female BOOLEAN,
-             description, varchar(140));])
+             female BOOLEAN);])
 
     @db.exec( %Q[
              CREATE TABLE IF NOT EXISTS users(
-             id SERIAL PRIMARY KEY,
-             store_id REFERENCES stores,
-             quality_id REFERENCES qualities,
-             male BOOLEAN,
-             female BOOLEAN);])
+             user_id SERIAL PRIMARY KEY,
+             first_name TEXT,
+             last_name TEXT,
+             username TEXT,
+             password TEXT,
+             birthday DATE,
+             sex TEXT,
+             email TEXT,
+             admin BOOLEAN);])
+
+    @db.exec( %Q[
+             CREATE TABLE IF NOT EXISTS sessions(
+             session_id SERIAL PRIMARY KEY,
+             session_key TEXT,
+             user_id INTEGER REFERENCES users);])
   end
 
-  def select(table, return_class, cols_hash, cols_returned_array = ["*"])
+  def drop_tables
+      @db.exec("DROP TABLE IF EXISTS stores_qualities;")
+      @db.exec("DROP TABLE IF EXISTS sessions;")
+      @db.exec("DROP TABLE IF EXISTS qualities;")
+      @db.exec("DROP TABLE IF EXISTS stores;")
+      @db.exec("DROP TABLE IF EXISTS users;")
+  end
+
+  def select_one(table, return_class, cols_hash, cols_returned_array = ["*"])
     c = cols_returned_array.join(',')
     request = "SELECT #{c} FROM #{table}"
     if cols_hash.empty?
@@ -60,32 +77,31 @@ class SMS::DB
         end
       end
 
-      request += " WHERE " + params.join(" AND ") + ";"
+      #request += " WHERE " + params.join(" AND ") + ";"
 
-      responses = @db.exec_param(request, values)
+      responses = @db.exec_params(request, values)
     end
+    puts responses.error_message
     responses.map { |response_params| return_class.__send__(:new, response_params) }
   end
 
-  def insert_into(table, return_class, cols_hash, return_cols=['id'])
+  def insert_into(table, return_class, cols_hash, return_col)
     return nil if cols_hash.empty?
     params = []
     values = []
     cols_hash.each do |param, value|
+      next if value.nil?
       params << param
       values << value
     end
 
-    params.join(',') 
-    values.join(',') 
-
-    request =  "INSERT INTO #{table} (#{params}) "
+    request =  "INSERT INTO #{table} (#{params.join(',')}) "
     request += "VALUES ($#{(1..values.length).map(&:to_s).join(',$')}) "
-    request += "RETURNING id;"
+    request += "RETURNING #{return_col};"
       
     responses = @db.exec_params(request, values)
 
-    responses.first[:id]
+    responses.first[return_col.to_sym]
   end
   
   def update(table, id, cols_hash = {})
@@ -95,16 +111,14 @@ class SMS::DB
     n = 0
 
     cols_hash.each do |param, value|
-      if valid_params.include? param
-        params << "#{param}=$#{n+=1}"
-        values << value
+      next if value.nil?
+      params << "#{param}=$#{n+=1}"
+      values << value
       end
-    end
 
-    params = params.join(',')
     values << id
 
-    @db.exec_params("UPDATE #{table} SET #{params} WHERE id=$#{n+=1};", values)
+    @db.exec_params("UPDATE #{table} SET #{params.join(',')} WHERE id=$#{n+=1};", values)
   end
 
   # --- Custom methods ---
@@ -130,7 +144,15 @@ class SMS::DB
 
     request += " WHERE " + params.join(" AND ") + ";"
 
-    responses = @db.exec_param(request, values)
+    responses = @db.exec_params(request, values)
     responses.map { |response_params| return_class.__send__(:new, response_params) }
+  end
+
+  def delete(table, id, id_var)
+    return nil unless id_var(-3,3) == "_id"
+
+    request =  "DELETE FROM #{table} WHERE #{id_var} = $1;"
+    
+    @db.exec_params(request, [id])
   end
 end
