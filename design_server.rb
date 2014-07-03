@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/json'
 require 'pry'
 
-require_relative 'lib/sms.rb'
+# require_relative 'lib/sms.rb'
 
 set :bind, '0.0.0.0'
 set :port, 9494
@@ -44,6 +44,9 @@ get '/design/results' do
 end
 
 get '/design/qualities' do
+  # data call here to actually get them
+  @qualities = ["sassy", "chic", "cature", "hip"]
+  @female = true
   erb :qualities
 end
 

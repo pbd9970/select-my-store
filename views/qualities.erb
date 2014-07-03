@@ -15,15 +15,22 @@
 
 </div>
 
+<% if @female %>
 <div class="row">
   <div class="small-6 large-centered columns">
     <ul id="qualityPool" class="button-group [radius round]">
-      <li><a href="#" class="button">Sassy 1</a></li>
-      <li><a href="#" class="button">Sheek 2</a></li>
-      <li><a href="#" class="button">Playful 3</a></li>
-      <li><a href="#" class="button">Versitile 4</a></li>
+    <% @qualities.each do |quality| %>
+      <li><a href="#" class="button"><%= quality %></a></li>
+    <% end %>
     </ul>
   </div>
 </div>
+<% else %>
+<div class="row">
+  <div class="small-4 large-centered columns">
+    male condition
+  </div>
+</div>
+<% end %>
 
 

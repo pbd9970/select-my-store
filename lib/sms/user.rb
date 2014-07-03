@@ -38,10 +38,10 @@ class SMS::User < DB_class
   end
 
   def stores(qualities_array)
-    qualities_array.map{|quality_name| do
+    qualities_array.map do |quality_name|
       SMS::Quality.new({name: quality_name}).retrieve!
     end
-    qualities_array.map(|quality| do
+    qualities_array.map do |quality|
       quality.stores.flatten
     end
   end
