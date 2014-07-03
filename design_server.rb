@@ -16,12 +16,11 @@ get '/design' do
   erb :index
 end
 
-get 'design/home' do
-
-erb :index
+get '/design/home' do
+  erb :index
 end
 
-post 'design/home' do
+post '/design/home' do
   puts params
   erb :index
 end
@@ -39,9 +38,11 @@ post '/sign_in' do
     @error = result[:error]
     erb :signin_error
   end
+  redirect to '/design/home'
 end
 
 get '/design/home' do
+  @user = true
   erb :home
 end
 
