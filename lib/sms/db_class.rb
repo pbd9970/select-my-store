@@ -1,9 +1,9 @@
-class DB_class
+class SMS::DB_class
   def db_map(db_cols, db_map_attrs)
     db_cols ||= db_map_attrs.keys
     db_cols = Array.new(1,db_cols) unless db_cols.is_a?(Array)
 
-    db_map.select { |key,v| db_cols.include?(key) || db_cols.include?(key.to_sym }
+    db_map.select { |key,v| (db_cols.include?(key) || db_cols.include?(key.to_sym)) }
   end
 
   def save!(table, table_class, cols_hash, return_cols=['id'])

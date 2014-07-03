@@ -9,9 +9,9 @@ require 'pg'
 require 'digest'
 require 'securerandom'
 
+require_relative 'sms/db_class.rb'
 require_relative 'sms/user.rb'
 require_relative 'sms/store.rb'
 require_relative 'sms/quality.rb'
 require_relative 'sms/db.rb'
-require_relative 'sms/db_class.rb'
 #require_relative "sms/scripts/*.rb"

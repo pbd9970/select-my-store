@@ -1,4 +1,4 @@
-class SMS::Quality < DB_class
+class SMS::Quality < SMS::DB_class
   attr_accessor :name, :male, :female, :quality_id
 
   def initialize(params)
@@ -20,7 +20,7 @@ class SMS::Quality < DB_class
   def stores(sex, age)
     return nil unless age.is_a?(Integer)
     return nil if @quality_id == nil
-    SMS.db.select_join([:stores,:stores_qualitites], SMS::Store, :store_id, {sex => true},"#{age} BETWEEN stores.min_age AND stores.max_age")
+    SMS.db.select_join(SMS::Store, :store_id, {sex => true},[:stores,:stores_qualitites], "#{age} BETWEEN stores.min_age AND stores.max_age")
   end
 
   def save!

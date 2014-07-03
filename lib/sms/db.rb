@@ -109,7 +109,7 @@ class SMS::DB
 
   # --- Custom methods ---
 
-  def select_join(tables=[:get_vals, :check_vals], return_class, merge_val, check_cols_hash, extra_tests='')
+  def select_join(return_class, merge_val, check_cols_hash, tables=[:get_vals, :check_vals], extra_tests="")
     return nil if !(tables.is_a? Array) && merge_val.nil? && (check_cols_hash.empty? || extra_tests.empty?)
 
     request  = "SELECT t1.* #{tables[0]} t1 JOIN #{tables[1]} t2"

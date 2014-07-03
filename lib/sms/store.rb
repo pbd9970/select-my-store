@@ -1,4 +1,4 @@
-class SMS::Store < DB_class
+class SMS::Store < SMS::DB_class
   attr_accessor :name, :website, :image_url, :store_id, :min_age, :max_age
 
   def initialize(params)
@@ -25,19 +25,18 @@ class SMS::Store < DB_class
     quality = SMS::Quality.new({name: quality_name}).retrieve!
 
     db_map_attrs = {
-      "store_id"   = @store_id,
-      "quality_id" = quality.quality_id,
-      "male"       = male,
-      "female"     = female
+      "store_id"   => @store_id,
+      "quality_id" => quality.quality_id,
+      "male"       => male,
+      "female"     => female
     }
 
     SMS.db.insert_into(:stores_qualities, nil, db_map_attrs, [])
-    end
   end
 
   def save!
     @password = Digest::SHA1.hexdigest password
-    super(:users, self.class, db_map))
+    super(:users, self.class, db_map)
   end
 
   def update!(db_cols)
@@ -45,7 +44,7 @@ class SMS::Store < DB_class
   end
 
   def retrieve!
-    db_cols = db_map.select {|k,value| value }
+    db_cols = db_map.select { |k,value| value }
     super(:users, self.class, db_cols)
   end
 end

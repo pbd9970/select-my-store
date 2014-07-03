@@ -1,4 +1,4 @@
-class SMS::User < DB_class
+class SMS::User < SMS::DB_class
   attr_accessor :first_name, :last_name, :username, :birthday, :sex, :email, :admin, :user_id
 
   def initialize(params)
