@@ -21,9 +21,9 @@ get 'design/home' do
 erb :index
 end
 
-post 'sign_in' do
+post '/sign_in' do
   if user
-    redirect 'design/home'
+    redirect '/design/home'
   end
 
   puts params
