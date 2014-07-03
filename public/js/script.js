@@ -6,6 +6,12 @@ $(function() {
   $('#qualityPool').delegate('li', 'click', function () {
     //move up
     $(this).appendTo("#selectedQualities");
+
+    var params = { 'qualities':[] }
+    $('#selectedQualities li a').each(function () {
+      params.qualities.push($(this).text());
+    });
+    console.log(params);
   })
 
   $('#selectedQualities').delegate('li', 'click', function () {
