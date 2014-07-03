@@ -9,8 +9,8 @@ require 'pg'
 require 'digest'
 require 'securerandom'
 
-require-relative 'sms/user.rb'
-require-relative 'sms/store.rb'
-require-relative 'sms/quality.rb'
-require-relative 'sms/db.rb'
-#require-relative "sms/scripts/*.rb"
+require_relative 'sms/user.rb'
+require_relative 'sms/store.rb'
+require_relative 'sms/quality.rb'
+require_relative 'sms/db.rb'
+#require_relative "sms/scripts/*.rb"
