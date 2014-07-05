@@ -1,9 +1,9 @@
-class SMS::DB_class
-  def db_join_map
-    db_map
+module DB_class
+  def db_map_attrs
+    raise NotImplementedError
   end
 
-  def db_map(db_cols, db_map_attrs)
+  def db_map(db_cols=nil)
     return db_map_attrs if db_cols.nil?
     db_cols = [db_cols] unless db_cols.is_a?(Array)
 

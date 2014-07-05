@@ -102,7 +102,7 @@ class SMS::DB
     responses = @db.exec_params(request, values)
 
     response = responses.first
-    response[return_col.to_s].to_i
+    response[return_col.to_s]
   end
   
   def update(table, id, cols_hash = {})

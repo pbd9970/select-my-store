@@ -1,4 +1,5 @@
-class SMS::User < SMS::DB_class
+class SMS::User
+  include DB_class
   attr_accessor :first_name, :last_name, :username, :birthday, :sex, :email, :admin, :user_id
 
   @@unique_val = :username
@@ -26,8 +27,8 @@ class SMS::User < SMS::DB_class
     update!(:password)
   end
 
-  def db_map(db_cols=nil)
-    db_map_attrs = {
+  def db_map_attrs
+    {
       "first_name" => @first_name,
       "last_name"  => @last_name ,
       "username"   => @username  ,
@@ -37,7 +38,6 @@ class SMS::User < SMS::DB_class
       "admin"      => @admin     ,
       "sex"        => @sex       ,
     }
-    super(db_cols, db_map_attrs)
   end
 
   def stores(qualities_array)
@@ -52,6 +52,7 @@ class SMS::User < SMS::DB_class
   def save!
     @password = Digest::SHA1.hexdigest @password
     @user_id = super(:users, db_map, :user_id)
+    @user_id.is_a?(self.class) ? @user_id : self
   end
 
   def update!(db_cols)

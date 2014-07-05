@@ -1,4 +1,5 @@
-class SMS::Store < SMS::DB_class
+class SMS::Store
+  include DB_class
   attr_accessor :name, :website, :image_url, :store_id, :min_age, :max_age
 
   @@unique_val = :name
@@ -13,8 +14,8 @@ class SMS::Store < SMS::DB_class
     @max_age   = params[:max_age  ]
   end
 
-  def db_map(db_cols=nil)
-    db_map_attrs = {
+  def db_map_attrs(db_cols=nil)
+    {
       "name"       => @name,
       "website"    => @website,
       "image_url"  => @image_url,
@@ -22,7 +23,6 @@ class SMS::Store < SMS::DB_class
       "min_age"    => @min_age,
       "max_age"    => @max_age
     }
-    super(db_cols, db_map_attrs)
   end
 
   def find_qualities(params)
@@ -62,6 +62,7 @@ class SMS::Store < SMS::DB_class
 
   def save!
     @store_id = super(:stores, db_map, :store_id)
+    @store_id.is_a?(self.class) ? @store_id : self
   end
 
   def update!(db_cols)

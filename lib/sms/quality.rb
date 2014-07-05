@@ -1,4 +1,5 @@
-class SMS::Quality < SMS::DB_class
+class SMS::Quality
+  include DB_class
   attr_accessor :name, :male, :female, :quality_id
 
   @@unique_val = :name
@@ -12,23 +13,23 @@ class SMS::Quality < SMS::DB_class
     @name.downcase!
   end
 
-  def db_map(db_cols=nil)
-    db_map_attrs = {
+  def db_map_attrs
+    {
       "name"   => @name  ,
       "female" => @female,
       "male"   => @male  ,
     }
-    super(db_cols, db_map_attrs)
   end
 
   def stores(sex, age)
-    return nil unless age.is_a?(Integer)
-    return nil if @quality_id == nil
-    SMS.db.select_join(SMS::Store, :store_id, {sex => true},[:stores,:stores_qualitites], "#{age} BETWEEN stores.min_age AND stores.max_age")
+    return nil if !age.is_a?(Integer) && @quality_id.nil?
+    extra_test = "#{age} BETWEEN t1.min_age AND t1.max_age"
+    SMS.db.select_join(SMS::Store, :store_id, {sex => true},[:stores,:stores_qualities], extra_test)
   end
 
   def save!
     @quality_id = super(:qualities, db_map, :quality_id)
+    @quality_id.is_a?(self.class) ? @quality_id : self
   end
 
   def update!(db_cols)
@@ -40,9 +41,10 @@ class SMS::Quality < SMS::DB_class
     super(:qualities, self.class, db_cols)
   end
 
-  def self.qualities(params)
+  def self.available(params)
     db_cols = Hash.new
-    db_cols[sex.to_sym] = true
-    SMS.db.select_one(:qualities, self.class, db_cols) 
+    db_cols[params[:sex].to_sym] = true
+    binding.pry
+    SMS.db.select_one(:qualities, self, db_cols) 
   end
 end
