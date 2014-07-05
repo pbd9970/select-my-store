@@ -1,18 +1,18 @@
 <% if @user %>
   <header class="clearfix">
   <div class="row">
-    <div class="large-2 columns logo">
+    <div class="small-2 large-4 columns logo">
       <img src="/images/logo/select-my-store-logo.jpg"/>
     </div>
-    <div class="large-3 columns login">
-      <form method="post" action="sign_in">
+    <div class="small-2 large-4 columns login">
+      <form method="post" action="/design/home">
         <input type="text" placeholder="username" name="username" />
         <input type="password" placeholder="password" name="password" />
         <input type="submit" value="Login" class="button tiny" />
         <a href="#" class="button tiny">Sign Up</a>
       </form>
     </div>
-    <div class="large-2 columns media">
+    <div class="small-2 large-4 columns media">
       <span>a</span>
       <span>b</span>
       <span>c</span>
@@ -21,12 +21,12 @@
 </header>
 <% else %>
   <header class="clearfix">
-  <div class="row">
-    <div class="large-5 columns logo">
+  <div class="row" id="header">
+    <div class="small-2 large-4 columns logo">
      <img src="/images/logo/select-my-store-logo.jpg"/>
     </div>
-    <div class="large-3 columns login">
-      <form method="post" action="design/home">
+    <div class="small-2 large-4 columns login">
+      <form method="post" action="/design/home">
         <input type="text" placeholder="username" name="username" />
         <input type="password" placeholder="password" name="password" />
         <div class="buttons">
@@ -35,7 +35,7 @@
         </div>
       </form>
     </div>
-    <div class="large-2 columns media">
+    <div class="small-2 large-4 columns media">
       <span>a</span>
       <span>b</span>
       <span>c</span>

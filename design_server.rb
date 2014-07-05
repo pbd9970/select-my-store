@@ -16,14 +16,14 @@ get '/design' do
   erb :index
 end
 
-get '/home' do
+get '/design/home' do
 
-erb :index
+  erb :home
 end
 
-post '/home' do
+post '/design/home' do
   puts params
-  erb :index
+  erb :home
 end
 
 # post '/sign_in' do
@@ -40,9 +40,9 @@ end
 #     erb :signin_error
 #   end
 
-get '/design/home' do
-  erb :home
-end
+# get '/design/home' do
+#   erb :home
+# end
 
 get '/design/results' do
   erb :results

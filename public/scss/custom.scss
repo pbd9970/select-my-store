@@ -11,6 +11,10 @@ header .logo {
   display: inline-block;
 }
 
+#header{
+  margin: 0px;
+}
+
 #myModal, .reveal-modal.open{
   border-radius: 3px;
   width: 40em;
@@ -34,6 +38,11 @@ header .logo {
 .sign-up{
   width: 65%;
   margin: 0 auto;
+}
+
+#sign-up-span{
+  text-align: center;
+  padding-bottom: 3px;
 }
 
 #sign-up{
