@@ -1,12 +1,9 @@
 
-<h1 align="center"><strong>What kind of style do they have?</strong> </h1>
-
-<br>
-<br>
 <div class="row">
   <div class="large-6 large-centered columns">
-    <ul id="selectedQualities" class="button-group [radius round]">
-    </ul>
+    <h1 align="center"><strong>What kind of style do they have?</strong> </h1>
+      <ul id="selectedQualities" class="button-group [radius round]">
+      </ul>
   </div>
 </div>
 
@@ -18,18 +15,20 @@
 <hr />
 
 <% if @female %>
-  <div class="row">
-    <div class="small-6 large-centered columns">
+  <div class="row" id="qualities">
+  <!-- <div class="panel" id="qual-panel"> -->
+    <div class="large-7 large-centered columns">
       <ul id="qualityPool" class="button-group [radius round]">
       <%# @qualities.each do |quality| %>
         <!-- <li><a href="#" class="button"><%#= quality %></a></li> -->
       <%# end %>
       </ul>
     </div>
+  <!--   </div> -->
   </div>
 <% else %>
   <div class="row">
-    <div class="small-4 large-centered columns">
+    <div class="small-6 large-centered columns">
       <ul id="qualityPool" class="button-group [radius round]">
         male condition
       </ul>

@@ -1,3 +1,8 @@
+*{
+  font-family: Dense-Regular, sans-serif, verdana;
+  letter-spacing:2px;
+  font-weight: bold;
+}
 header {
   background: black;
   color: white;
@@ -52,6 +57,11 @@ header .logo {
   border-radius: 3px;
 }
 
+// .row, #qual-panel{
+//   width: 80%
+
+// }
+
 .footer {
   // @include panel;
   width: 100%;
@@ -102,9 +112,9 @@ header .logo {
   border-radius: 3px;
 }
 
-#quality-pool{
-  background-color: #f6c705;
+ul, #qualityPool, li{
   border-radius: 3px;
+  list-style-type: none;
 }
 
 #user-info{

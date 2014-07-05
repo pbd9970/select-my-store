@@ -99,13 +99,13 @@ end
 
 get '/design/qualities' do
   # data call here to actually get them
-  @qualities = ["sassy", "chic", "cature", "hip"]
+  @qualities = ["sassy", "chic", "couture", "hip", "grunge","sassy", "chic", "couture", "hip", "grunge","sassy", "chic", "couture", "hip", "grunge"]
   @female = true
   erb :qualities
 end
 
 get '/api/qualities' do
-  @qualities = ["sassy", "chic", "cature", "hip"]
+  @qualities = ["sassy", "chic", "couture", "hip", "grunge","sassy", "chic", "couture", "hip", "grunge","sassy", "chic", "couture", "hip", "grunge"]
   json @qualities
 end
 
