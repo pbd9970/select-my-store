@@ -6687,32 +6687,45 @@ header .logo {
   display: inline-block; }
 
 /* line 14, ../scss/custom.scss */
+#header {
+  margin: 0px; }
+
+/* line 18, ../scss/custom.scss */
 #myModal, .reveal-modal.open {
   border-radius: 3px;
   width: 40em;
   margin: 132px 0px 0px -250px;
   border: 1px solid black; }
 
-/* line 23, ../scss/custom.scss */
+/* line 27, ../scss/custom.scss */
 .panel {
   width: 80%;
   margin: 0 auto;
   border: 1px solid black;
   border-radius: 3px; }
 
-/* line 30, ../scss/custom.scss */
+/* line 34, ../scss/custom.scss */
+.large-3.columns.login {
+  float: right; }
+
+/* line 38, ../scss/custom.scss */
 .sign-up {
   width: 65%;
   margin: 0 auto; }
 
-/* line 35, ../scss/custom.scss */
+/* line 43, ../scss/custom.scss */
+#sign-up-span {
+  text-align: center;
+  padding-bottom: 3px; }
+
+/* line 48, ../scss/custom.scss */
 #sign-up {
   margin-left: 84px;
   font-size: 16px;
   background: black;
   border-radius: 3px; }
 
-/* line 42, ../scss/custom.scss */
+/* line 55, ../scss/custom.scss */
 .footer {
   width: 100%;
   height: 4em;
@@ -6722,46 +6735,51 @@ header .logo {
   bottom: 0;
   font-size: 16px; }
 
-/* line 53, ../scss/custom.scss */
+/* line 66, ../scss/custom.scss */
 .footer a {
   color: white;
   text-align: center; }
 
-/* line 58, ../scss/custom.scss */
+/* line 71, ../scss/custom.scss */
 .orbit-container {
   width: 100%;
   margin: 0 auto; }
 
-/* line 63, ../scss/custom.scss */
+/* line 76, ../scss/custom.scss */
 .example-orbit, img {
   width: 100%;
   height: 50%; }
 
-/* line 68, ../scss/custom.scss */
+/* line 81, ../scss/custom.scss */
 .buttons {
   text-align: right; }
 
-/* line 72, ../scss/custom.scss */
+/* line 85, ../scss/custom.scss */
 .button.tiny {
   background-color: #f6c705;
   padding-bottom: 9px;
   padding-top: 11px;
   border-radius: 3px; }
 
-/* line 79, ../scss/custom.scss */
+/* line 92, ../scss/custom.scss */
 .button.tiny:hover {
   background-color: #666; }
 
-/* line 83, ../scss/custom.scss */
+/* line 96, ../scss/custom.scss */
 .panel {
   background-color: #f6c70d; }
 
-/* line 87, ../scss/custom.scss */
+/* line 100, ../scss/custom.scss */
 .small.button {
   background-color: #f6c705;
   border-radius: 3px; }
 
-/* line 92, ../scss/custom.scss */
+/* line 105, ../scss/custom.scss */
 #quality-pool {
   background-color: #f6c705;
   border-radius: 3px; }
+
+/* line 110, ../scss/custom.scss */
+#user-info {
+  margin-top: 150px;
+  text-align: center; }
