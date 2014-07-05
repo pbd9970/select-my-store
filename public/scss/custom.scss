@@ -52,10 +52,11 @@ header .logo {
 
 .footer a{
   color: white;
+  text-align: center;
 }
 
 .orbit-container{
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -81,6 +82,16 @@ header .logo {
 
 .panel{
   background-color: #f6c70d;
+}
+
+.small.button{
+  background-color: #f6c705;
+  border-radius: 3px;
+}
+
+#quality-pool{
+  background-color: #f6c705;
+  border-radius: 3px;
 }
 
 

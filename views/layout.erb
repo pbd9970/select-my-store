@@ -19,13 +19,15 @@
         <%= yield %>
       </div>
 
-      <%= erb :_modals %>
 
-      <% if !params.nil? %>
+
+      <!-- <% if !params.nil? %>
         <hr />
         <%= params.inspect %>
-      <% end %>
+      <% end %> -->
       <%= erb :_footer %>
+
+      <%= erb :_modals %>
       <!-- body goes here -->
       <script type="text/javascript" src="/js/vendor/jquery.min.js"></script>
       <script type="text/javascript" src="/js/vendor/jquery-2.1.0.min.js"></script>
