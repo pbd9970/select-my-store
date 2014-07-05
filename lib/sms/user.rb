@@ -4,6 +4,7 @@ class SMS::User < SMS::DB_class
   @@unique_val = :username
 
   def initialize(params)
+    params = OpenStruct.new(params)
     @first_name = params[:first_name]
     @last_name  = params[:last_name ]
     @username   = params[:username  ]
@@ -50,7 +51,7 @@ class SMS::User < SMS::DB_class
 
   def save!
     @password = Digest::SHA1.hexdigest @password
-    @user_id = super(:users, self.class, db_map, :user_id)
+    @user_id = super(:users, db_map, :user_id)
   end
 
   def update!(db_cols)

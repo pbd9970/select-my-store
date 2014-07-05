@@ -4,10 +4,12 @@ class SMS::Quality < SMS::DB_class
   @@unique_val = :name
 
   def initialize(params)
-    @name       = params[:name      ].downcase
+    params = OpenStruct.new(params)
+    @name       = params[:name      ]
     @male       = params[:male      ]
     @female     = params[:female    ]
     @quality_id = params[:quality_id] || nil
+    @name.downcase!
   end
 
   def db_map(db_cols=nil)
@@ -26,7 +28,7 @@ class SMS::Quality < SMS::DB_class
   end
 
   def save!
-    @quality_id = super(:qualities, self.class, db_map, :quality_id)
+    @quality_id = super(:qualities, db_map, :quality_id)
   end
 
   def update!(db_cols)
@@ -36,5 +38,11 @@ class SMS::Quality < SMS::DB_class
   def retrieve!
     db_cols = @quality_id ? {quality_id: @quality_id} : db_map(@@unique_val)
     super(:qualities, self.class, db_cols)
+  end
+
+  def self.qualities(params)
+    db_cols = Hash.new
+    db_cols[sex.to_sym] = true
+    SMS.db.select_one(:qualities, self.class, db_cols) 
   end
 end

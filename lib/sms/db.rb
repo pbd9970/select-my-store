@@ -59,9 +59,9 @@ class SMS::DB
       @db.exec("DROP TABLE IF EXISTS users;")
   end
 
-  def select_one(table, return_class, cols_hash, cols_returned_array = ["*"])
-    c = cols_returned_array.join(',')
-    request = "SELECT #{c} FROM #{table}"
+  def select_one(table, return_class, cols_hash)
+    
+    request = "SELECT * FROM #{table}"
     if cols_hash.empty?
       responses = @db.exec(request + ";")
     else
@@ -77,16 +77,16 @@ class SMS::DB
         end
       end
 
-      #request += " WHERE " + params.join(" AND ") + ";"
-
-      responses = @db.exec_params(request, values)
+      request += " WHERE " + params.join(" AND ") + ";"
     end
-    puts responses.error_message
+    responses = @db.exec_params(request, values)
+
+    return responses unless responses
     responses.map { |response_params| return_class.__send__(:new, response_params) }
   end
 
-  def insert_into(table, return_class, cols_hash, return_col)
-    return nil if cols_hash.empty?
+  def insert_into(table, cols_hash, return_col=:id)
+    return nil if return_col.to_s.slice(-2,2) != "id" && return_col || cols_hash.empty?
     params = []
     values = []
     cols_hash.each do |param, value|
@@ -97,11 +97,12 @@ class SMS::DB
 
     request =  "INSERT INTO #{table} (#{params.join(',')}) "
     request += "VALUES ($#{(1..values.length).map(&:to_s).join(',$')}) "
-    request += "RETURNING #{return_col};"
+    request += return_col.nil? ? ";" : "RETURNING #{return_col};" 
       
     responses = @db.exec_params(request, values)
 
-    responses.first[return_col.to_sym]
+    response = responses.first
+    response[return_col.to_s].to_i
   end
   
   def update(table, id, cols_hash = {})
@@ -126,8 +127,8 @@ class SMS::DB
   def select_join(return_class, merge_val, check_cols_hash, tables=[:get_vals, :check_vals], extra_tests="")
     return nil if !(tables.is_a? Array) && merge_val.nil? && (check_cols_hash.empty? || extra_tests.empty?)
 
-    request  = "SELECT t1.* #{tables[0]} t1 JOIN #{tables[1]} t2"
-    request += "ON t1.#{merge_val}=t2.#{merge_val}"
+    request  = "SELECT t1.* FROM #{tables[0]} t1 JOIN #{tables[1]} t2"
+    request += " ON t1.#{merge_val}=t2.#{merge_val}"
 
     params = []
     values = []
@@ -149,7 +150,7 @@ class SMS::DB
   end
 
   def delete(table, id, id_var)
-    return nil unless id_var(-3,3) == "_id"
+    return nil unless id_var.slice(-3,3) == "_id"
 
     request =  "DELETE FROM #{table} WHERE #{id_var} = $1;"
     

@@ -8,6 +8,7 @@ require 'sinatra'
 require 'pg'
 require 'digest'
 require 'securerandom'
+require 'ostruct'
 
 require_relative 'sms/db_class.rb'
 require_relative 'sms/user.rb'
