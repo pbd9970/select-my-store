@@ -22,6 +22,7 @@ class SMS::Session
   def self.delete(session)
 
     return_hash = @@return_hash.dup
+    cols_hash = Hash.new
 
     cols_hash = Hash.new
     session_id  = session[:sms_session_id]
