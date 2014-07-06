@@ -4,7 +4,7 @@ require 'pry'
 require_relative 'lib/sms.rb'
 
 # require_relative 'lib/sms.rb'
-enable 'sessions'
+enable :sessions
 
 set :bind, '0.0.0.0'
 set :port, 9494
