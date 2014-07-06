@@ -1,8 +1,11 @@
 class SMS::Session
-  @@return_hash = {errors: [], success?: false}.freeze
+  def self.return_hash_master
+    {errors: [], success?: false}
+  end
+
   def self.validate(session)
 
-    return_hash = @@return_hash.dup
+    return_hash = return_hash_master
     cols_hash = Hash.new
 
     cols_hash[:session_id]  = session[:sms_session_id]
@@ -14,14 +17,14 @@ class SMS::Session
       return_hash[:success?] = true
       return_hash[:user    ] = result
     else
-      return_hash[:errors   ] << "Invalid session"
+      return_hash[:errors  ] << "Invalid session"
     end
     return_hash
   end
 
   def self.delete(session)
 
-    return_hash = @@return_hash.dup
+    return_hash = return_hash_master
     cols_hash = Hash.new
 
     cols_hash = Hash.new
@@ -38,7 +41,7 @@ class SMS::Session
 
   def self.create(params)
 
-    return_hash = @@return_hash.dup
+    return_hash = return_hash_master
 
     user = SMS::User.new(params).retrieve!
 

@@ -21,7 +21,7 @@ class SMS::DB
              website TEXT,
              image_url TEXT,
              min_age INTEGER NOT NULL,
-             max_age INTEGER NOT NULL
+             max_age INTEGER NOT NULL,
              detail varchar(140));])
 
     @db.exec( %Q[
