@@ -78,7 +78,7 @@ get '/results' do
   erb :results
 end
 
-get '/qualities' do
+post '/qualities' do
   # data call here to actually get them
   @qualities = ["sassy", "chic", "couture", "hip", "grunge","sassy", "chic", "couture", "hip", "grunge","sassy", "chic", "couture", "hip", "grunge"]
   @female = true
