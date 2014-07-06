@@ -14,7 +14,7 @@ class SMS::Session
       return_hash[:success?] = true
       return_hash[:user    ] = result
     else
-      return_hash[:error   ] = "Invalid session"
+      return_hash[:error   ] << "Invalid session"
     end
     return_hash
   end
@@ -31,7 +31,7 @@ class SMS::Session
     if result
       return_hash[:success?] = true
     else
-      return_hash[:errors]   = "Error during logout"
+      return_hash[:errors] << "Error during logout"
     end
     return_hash
   end
@@ -53,13 +53,13 @@ class SMS::Session
           return_hash[:sms_session_id ] = session_id 
           return_hash[:success?       ] = true
         else
-          return_hash[:errors         ] = "There was a problem signing in"
+          return_hash[:errors         ] << "There was a problem signing in"
         end
       else
-        return_hash[:errors] = "Invalid password"
+        return_hash[:errors] << "Invalid password"
       end
     else
-      return_hash[:errors] = "Invalid username"
+      return_hash[:errors] << "Invalid username"
     end
     return_hash
   end

@@ -4,19 +4,14 @@
     <div class="small-2 large-4 columns logo">
       <img src="/images/logo/select-my-store-logo.jpg"/>
     </div>
-    <form method="post" action="/home">
+
+    <span><%= @user.username %></span>
+  
+    <form method="post" action="/sign_out">
      <div class="buttons">
        <input type="submit" value="Logout" class="button tiny" />
      </div>
     </form>
-<!--     <div class="small-2 large-4 columns login">
-      <form method="post" action="/home">
-        <input type="text" placeholder="username" name="username" />
-        <input type="password" placeholder="password" name="password" />
-        <input type="submit" value="Login" class="button tiny" />
-        <a href="#" class="button tiny">Sign Up</a>
-      </form>
-    </div> -->
     <div class="small-2 large-4 columns media">
       <span>a</span>
       <span>b</span>
@@ -31,7 +26,7 @@
      <img src="/images/logo/select-my-store-logo.jpg"/>
     </div>
     <div class="small-2 large-4 columns login">
-      <form method="post" action="/home">
+      <form method="post" action="/sign_in">
         <input type="text" placeholder="username" name="username" />
         <input type="password" placeholder="password" name="password" />
         <div class="buttons">
