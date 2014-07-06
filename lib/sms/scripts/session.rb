@@ -14,7 +14,7 @@ class SMS::Session
       return_hash[:success?] = true
       return_hash[:user    ] = result
     else
-      return_hash[:error   ] << "Invalid session"
+      return_hash[:errors   ] << "Invalid session"
     end
     return_hash
   end
@@ -50,7 +50,7 @@ class SMS::Session
 
         if session_id
           return_hash[:sms_session_key] = session_key
-          return_hash[:sms_session_id ] = session_id 
+          return_hash[:sms_session_id ] = session_id
           return_hash[:success?       ] = true
         else
           return_hash[:errors         ] << "There was a problem signing in"
