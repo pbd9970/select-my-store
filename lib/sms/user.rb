@@ -41,12 +41,12 @@ class SMS::User
   end
 
   def stores(qualities_array, sex, age)
-    qualities_array.map! do |quality_name|
-      SMS::Quality.new({name: quality_name}).retrieve!
-    end
-    qualities_array.map do |quality|
+    return_stores = qualities_array.map do |quality_name|
+      quality = SMS::Quality.new({name: quality_name}).retrieve!
       quality.stores(sex,age)
     end
+    #use a hash to eliminate duplicate values efficiently
+    Hash[return_stores.flatten.map { |store| [store.store_id, store] }].values
   end
 
   def save!
