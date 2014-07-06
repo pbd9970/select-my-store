@@ -1,7 +1,7 @@
 class SMS::DB
   def initialize
     @db = PG.connect(host: 'localhost', dbname: 'SMS')
-    #drop_tables
+    # drop_tables
     build_tables
   end
 
@@ -60,7 +60,7 @@ class SMS::DB
   end
 
   def select_one(table, return_class, cols_hash)
-    
+
     request = "SELECT * FROM #{table}"
     if cols_hash.empty?
       responses = @db.exec(request + ";")
@@ -97,14 +97,14 @@ class SMS::DB
 
     request =  "INSERT INTO #{table} (#{params.join(',')}) "
     request += "VALUES ($#{(1..values.length).map(&:to_s).join(',$')}) "
-    request += return_col.nil? ? ";" : "RETURNING #{return_col};" 
-      
+    request += return_col.nil? ? ";" : "RETURNING #{return_col};"
+
     responses = @db.exec_params(request, values)
 
     response = responses.first
     response[return_col.to_s]
   end
-  
+
   def update(table, id, cols_hash = {})
     return nil if cols_hash.empty?
     params = []
@@ -153,7 +153,7 @@ class SMS::DB
     return nil unless id_var.slice(-3,3) == "_id"
 
     request =  "DELETE FROM #{table} WHERE #{id_var} = $1;"
-    
+
     @db.exec_params(request, [id])
   end
 end

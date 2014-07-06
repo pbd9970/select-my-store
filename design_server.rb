@@ -18,54 +18,6 @@ get '/design' do
   erb :index
 end
 
-# get '/design/home' do
-# <<<<<<< HEAD
-#   erb :index
-# end
-
-# <<<<<<< HEAD
-# post '/sign_in' do
-#   if user
-#     redirect '/design/home'
-#   end
-
-# =======
-# post '/design/home' do
-# >>>>>>> c1d31e7449ef65a4cee4922aa66b1af258a274d6
-#   puts params
-#   erb :index
-# end
-
-# post '/sign_in' do
-#   params
-# <<<<<<< HEAD
-#   @user = true
-#   # result = SMS.script.sign_in(params)
-#   # if result[:success?]
-#   #   user = result[:user]
-#   #   @username = user.username
-#   #   @user_id = user.id
-#   #   session[:username] = user.username
-#   #   redirect '/design'
-#   # else
-#   #   @error = result[:error]
-#   #   erb :signin_error
-#   # end
-# =======
-#   result = SMS.script.sign_in(params)
-#   if result[:success?]
-#     user = result[:user]
-#     @username = user.username
-#     @user_id = user.id
-#     session[:username] = user.username
-#     redirect '/design'
-#   else
-#     @error = result[:error]
-#     erb :signin_error
-#   end
-#   redirect to '/design/home'
-# >>>>>>> c1d31e7449ef65a4cee4922aa66b1af258a274d6
-# end
 
 get '/design/home' do
   @user = true
@@ -78,30 +30,23 @@ post '/design/home' do
   erb :home
 end
 
-# post '/sign_in' do
-#   params
-#   result = SMS.script.sign_in(params)
-#   if result[:success?]
-#     user = result[:user]
-#     @username = user.username
-#     @user_id = user.id
-#     session[:username] = user.username
-#     redirect '/design'
-#   else
-#     @error = result[:error]
-#     erb :signin_error
-#   end
 
-# get '/design/home' do
-#   erb :home
-# end
+post 'design/logout' do
+  results = SMS::Session.validate(session)
+  if results[:success?]
+    @user = results[:user]
+    @error = results[:error]
+  end
+
+  erb :sign_out
+end
 
 post '/design/sign_up' do
   @user = SMS::User.new(params)
   @user.save!
 
   SMS::Session.create(params)
-  reroute '/design/home'
+  redirect '/design/home'
 
 end
 
