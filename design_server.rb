@@ -33,6 +33,16 @@ get '/home' do
 end
 
 
+get '/sign_out' do
+  result = SMS::Session.validate(session)
+  @error = result[:error]
+
+  SMS::Session.delete(session)
+  session.clear
+
+  erb :index
+end
+
 post '/sign_out' do
   result = SMS::Session.validate(session)
   @error = result[:error]
