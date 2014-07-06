@@ -7,8 +7,8 @@ class SMS::Quality
   def initialize(params)
     params = OpenStruct.new(params)
     @name       = params[:name      ]
-    @male       = params[:male      ]
-    @female     = params[:female    ]
+    @male       = params[:male      ] || false
+    @female     = params[:female    ] || false
     @quality_id = params[:quality_id] || nil
     @name.downcase!
   end
@@ -33,7 +33,7 @@ class SMS::Quality
   end
 
   def update!(db_cols)
-    super(:qualities, self.class, db_cols)
+    super(:qualities, {quality_id: @quality_id}, db_cols)
   end
 
   def retrieve!
@@ -41,10 +41,13 @@ class SMS::Quality
     super(:qualities, self.class, db_cols)
   end
 
+  def delete!
+    super(:qualities, {quality_id: @quality_id})
+  end
+
   def self.available(params)
     db_cols = Hash.new
     db_cols[params[:sex].to_sym] = true
-    binding.pry
     SMS.db.select_one(:qualities, self, db_cols) 
   end
 end

@@ -21,8 +21,8 @@ class SMS::DB
              website TEXT,
              image_url TEXT,
              min_age INTEGER NOT NULL,
-             max_age INTEGER NOT NULL);])
-             #description varchar(140)
+             max_age INTEGER NOT NULL
+             detail varchar(140));])
 
     @db.exec( %Q[
              CREATE TABLE IF NOT EXISTS stores_qualities(
@@ -105,7 +105,7 @@ class SMS::DB
     response[return_col.to_s]
   end
 
-  def update(table, id, cols_hash = {})
+  def update(table, id_hash, cols_hash = {})
     return nil if cols_hash.empty?
     params = []
     values = []
@@ -117,9 +117,7 @@ class SMS::DB
       values << value
       end
 
-    values << id
-
-    @db.exec_params("UPDATE #{table} SET #{params.join(',')} WHERE id=$#{n+=1};", values)
+    @db.exec_params("UPDATE #{table} SET #{params.join(',')} WHERE #{id_hash.keys.first}=#{id_hash.values.first};", values)
   end
 
   # --- Custom methods ---
@@ -149,11 +147,11 @@ class SMS::DB
     responses.map { |response_params| return_class.__send__(:new, response_params) }
   end
 
-  def delete(table, id, id_var)
-    return nil unless id_var.slice(-3,3) == "_id"
+  def delete(table, id_hash)
+    return nil unless id_hash.keys.first.slice(-2,2) == "id"
 
-    request =  "DELETE FROM #{table} WHERE #{id_var} = $1;"
+    request =  "DELETE FROM #{table} WHERE #{id_hash.keys.first} = $1;"
 
-    @db.exec_params(request, [id])
+    @db.exec_params(request, id_hash.values)
   end
 end

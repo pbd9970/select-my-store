@@ -16,11 +16,15 @@ module DB_class
     SMS.db.insert_into(table, columns_hash, return_id)
   end
 
-  def update!(table, id, cols_array)
-    SMS.db.update(table, db_map(cols_array))
+  def update!(table, id_hash, cols_array)
+    SMS.db.update(table, id_hash, db_map(cols_array))
   end
 
   def retrieve!(table, table_class, cols_hash, cols_returned_array = ["*"])
     SMS.db.select_one(table, table_class, cols_hash).first
+  end
+
+  def delete!(table, id_hash)
+    SMS.db.delete(table, id_hash)
   end
 end

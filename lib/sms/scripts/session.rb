@@ -27,7 +27,7 @@ class SMS::Session
     cols_hash = Hash.new
     session_id  = session[:sms_session_id]
 
-    result = SMS.db.delete(:sessions, session_id, :session_id)
+    result = SMS.db.delete(:sessions, {session_id: session_id})
     if result
       return_hash[:success?] = true
     else

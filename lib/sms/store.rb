@@ -12,6 +12,7 @@ class SMS::Store
     @store_id  = params[:store_id ]
     @min_age   = params[:min_age  ]
     @max_age   = params[:max_age  ]
+    @detail    = params[:detail   ]
   end
 
   def db_map_attrs(db_cols=nil)
@@ -21,43 +22,52 @@ class SMS::Store
       "image_url"  => @image_url,
       "store_id"   => @store_id,
       "min_age"    => @min_age,
-      "max_age"    => @max_age
+      "max_age"    => @max_age,
+      "detail"     => @detail
     }
   end
 
-  def find_qualities(params)
-    db_hash = {
-      store_id:   @store_id,
-      quality_id: params[:quality_id]
-    }
-
-    #call the super function of db_map by 
-    #reconfiguring all 3 programs to pass the
-    #db_map_attrs along.
-  end
-
-  def add_quality(params)
+  def add_store_quality(params)
     quality_name = params[:name  ]
     male         = params[:male  ]
     female       = params[:female]
 
     return nil if @store_id.nil?
     quality = SMS::Quality.new({name: quality_name}).retrieve!
-    #Check if quality is not set for male/female category
+    #Check if quality is not set true for male/female category
     if quality.male != quality.male || male
-      quality.update!({male: male})
-    elsif quality.female != quality.female || female
-      quality.update!({female: female})
+      quality.male = male
+      quality.update!(:male)
+    end
+    if quality.female != quality.female || female
+      quality.female = female
+      quality.update!(:female)
     end
 
-    db_map_attrs = {
-      "store_id"   => @store_id,
-      "quality_id" => quality.quality_id,
-      "male"       => male,
-      "female"     => female
-    }
+    sq = SMS::Store_quality.new({
+      :store_id   => @store_id,
+      :quality_id => quality.quality_id,
+      :male       => male,
+      :female     => female
+    })
 
-    SMS.db.insert_into(:stores_qualities, db_map_attrs)
+    #save or retrieve from database if exists
+    sq = sq.save!
+
+    #overwrite saved db record if entry is different
+    unless male.nil?
+      if sq.male != male
+        sq.male = male
+        sq.update!(:male)
+      end
+    end
+
+    unless female.nil?
+      if sq.female != female
+        sq.female = female
+        sq.update!(:female)
+      end
+    end
   end
 
   def save!
@@ -66,11 +76,15 @@ class SMS::Store
   end
 
   def update!(db_cols)
-    super(:stores, self.class, db_cols)
+    super(:stores, {store_id: @store_id}, db_cols)
   end
 
   def retrieve!
     db_cols = @store_id ? {store_id: @store_id} : db_map(@@unique_val)
     super(:stores, self.class, db_cols)
+  end
+
+  def delete!
+    super(:stores, {store_id: @store_id})
   end
 end

@@ -56,11 +56,15 @@ class SMS::User
   end
 
   def update!(db_cols)
-    super(:users, self.class, db_cols)
+    super(:users, {user_id: @user_id}, db_cols)
   end
 
   def retrieve!
     db_cols = @user_id ? {user_id: @user_id} : db_map(@@unique_val)
     super(:users, self.class, db_cols)
+  end
+
+  def delete!
+    super(:users, {user_id: @user_id})
   end
 end
