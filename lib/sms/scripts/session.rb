@@ -3,12 +3,13 @@ class SMS::Session
   def self.validate(session)
 
     return_hash = @@return_hash.dup
+    cols_hash = Hash.new
 
     cols_hash[:session_id]  = session[:sms_session_id]
     cols_hash[:session_key] = session[:sms_session_key]
-    
-    result = SMS.db.select_join(SMS::User, :user_id, cols_hash, [:users, :sessions]) 
-    
+
+    result = SMS.db.select_join(SMS::User, :user_id, cols_hash, [:users, :sessions])
+
     if result
       return_hash[:success?] = true
       return_hash[:user    ] = result
@@ -20,10 +21,11 @@ class SMS::Session
   def self.delete(session)
 
     return_hash = @@return_hash.dup
+    cols_hash = Hash.new
 
     cols_hash[:session_id]  = session[:sms_session_id]
 
-    result = SMS.db.delete(SMS::User, :user_id, cols_hash, [:users, :sessions]) 
+    result = SMS.db.delete(SMS::User, :user_id, cols_hash, [:users, :sessions])
     if result
       return_hash[:success?] = true
     else
@@ -45,7 +47,7 @@ class SMS::Session
 
         if session_id
           return_hash[:sms_session_key] = sms_session_key
-          return_hash[:sms_session_id ] = sms_session_id 
+          return_hash[:sms_session_id ] = sms_session_id
           return_hash[:success?       ] = true
         else
           return_hash[:errors         ] = "There was a problem signing in"

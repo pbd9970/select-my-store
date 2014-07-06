@@ -1,8 +1,10 @@
 require 'sinatra'
 require 'sinatra/json'
 require 'pry'
+require_relative 'lib/sms.rb'
 
 # require_relative 'lib/sms.rb'
+enable 'sessions'
 
 set :bind, '0.0.0.0'
 set :port, 9494
@@ -71,7 +73,8 @@ get '/design/home' do
 end
 
 post '/design/home' do
-  puts params
+  @user = SMS::Session.validate(session)
+
   erb :home
 end
 
@@ -92,6 +95,15 @@ end
 # get '/design/home' do
 #   erb :home
 # end
+
+post '/design/sign_up' do
+  @user = SMS::User.new(params)
+  @user.save!
+
+  SMS::Session.create(params)
+  reroute '/design/home'
+
+end
 
 get '/design/results' do
   erb :results
