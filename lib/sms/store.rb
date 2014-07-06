@@ -1,6 +1,6 @@
 class SMS::Store
   include DB_class
-  attr_accessor :name, :website, :image_url, :store_id, :min_age, :max_age
+  attr_accessor :name, :website, :image_url, :store_id, :min_age, :max_age, :detail
 
   @@unique_val = :name
 
