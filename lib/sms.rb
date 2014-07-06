@@ -18,3 +18,4 @@ require_relative 'sms/store.rb'
 require_relative 'sms/quality.rb'
 require_relative 'sms/db.rb'
 require_relative "sms/scripts/session.rb"
+require_relative "sms/scripts/read_csv.rb"
