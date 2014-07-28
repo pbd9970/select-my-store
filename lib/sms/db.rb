@@ -82,7 +82,7 @@ class SMS::DB
     responses = @db.exec_params(request, values)
 
     return responses unless responses
-    responses.map { |response_params| return_class.__send__(:new, response_params) }
+    responses.map { |response_params| return_class.send(:new, response_params) }
   end
 
   def insert_into(table, cols_hash, return_col=:id)
@@ -144,7 +144,7 @@ class SMS::DB
     request += " WHERE " + params.join(" AND ") + ";"
 
     responses = @db.exec_params(request, values)
-    responses.map { |response_params| return_class.__send__(:new, response_params) }
+    responses.map { |response_params| return_class.send(:new, response_params) }
   end
 
   def delete(table, id_hash)
